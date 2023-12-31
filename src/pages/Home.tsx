@@ -4,9 +4,9 @@ import MainSwiper from "../components/MainSwiper";
 
 const Home = () => {
     return (
-        <div className="w-11/12 m-auto">
+        <main className="w-11/12 m-auto">
             <MainSwiper />
-        </div>
+        </main>
     );
 };
 

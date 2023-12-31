@@ -10,7 +10,7 @@ function App() {
         <div className="bg-gray-100 font-fjalla">
             <Header />
             <Routes>
-                <Route path="/" element={<Home />} />
+                <Route path="/home" element={<Home />} />
                 <Route path="/women" element={<Women />} />
                 <Route path="/men" element={<Men />} />
                 <Route path="/children" element={<Children />} />

@@ -1,7 +1,7 @@
 import React from "react";
 
 const Children = () => {
-    return <div>Children</div>;
+    return <main className="w-11/12 m-auto">Children</main>;
 };
 
 export default Children;

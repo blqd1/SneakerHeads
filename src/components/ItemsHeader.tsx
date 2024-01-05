@@ -1,59 +1,39 @@
 import React from "react";
-import Search from "../components/UI/Search";
-import Dropdown from "../components/UI/Dropdown";
-import { faSliders } from "@fortawesome/free-solid-svg-icons";
+import Search from "./UI/Search";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useDebounce } from "../hooks/hooks";
+import { faSliders } from "@fortawesome/free-solid-svg-icons";
+import Dropdown from "./Dropdown";
 
-const dropdownItems = ["Newest", "Price:Low-High", "Price:High-Low"];
-
-interface ItemsHeaderProps {
+interface HeaderProps {
+    onSearch: (value: string) => void;
     showFilter: boolean;
-    onSearch: (search: string) => void;
-    setShowFilter: (show: boolean) => void;
+    onShowFilter: (value: boolean) => void;
+    onSort: (value: string) => void;
 }
 
-const ItemsHeader: React.FC<ItemsHeaderProps> = ({
-    showFilter,
+const ItemsHeader: React.FC<HeaderProps> = ({
     onSearch,
-    setShowFilter,
+    showFilter,
+    onShowFilter,
+    onSort,
 }) => {
-    const [search, setSearch] = React.useState<string>("");
-    const debouncedSearch = useDebounce(search);
-    const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const newSearch = e.target.value;
-        setSearch(newSearch);
-    };
-
-    React.useEffect(() => {
-        onSearch(debouncedSearch);
-    }, [debouncedSearch, onSearch]);
-
-    const cleanSearch = () => {
-        setSearch("");
-    };
-
     return (
         <div className="w-full h-20 flex flex-row justify-between items-center">
             <div className="flex items-center gap-10">
-                <span className="text-2xl">Men`s Sneakers & Shoes</span>
-                <Search
-                    value={search}
-                    onChangeValue={onChangeSearch}
-                    onClickClean={cleanSearch}
-                />
+                <span className="text-2xl">Men`s Shoes & Sneakers</span>
+                <Search onDebounce={onSearch} />
             </div>
-            <div className="flex gap-5">
+            <div className="flex items-center gap-10">
                 <div
-                    onClick={() => setShowFilter(!showFilter)}
-                    className="cursor-pointer flex items-center gap-3 text-1xl border bg-white px-3 py-2"
+                    onClick={() => onShowFilter(!showFilter)}
+                    className="cursor-pointer flex items-center gap-3 text-1xl border bg-white px-5 py-2"
                 >
                     <span>{`${!showFilter ? "Show" : "Hide"} Filters`}</span>
                     <div>
                         <FontAwesomeIcon icon={faSliders} />
                     </div>
                 </div>
-                <Dropdown items={dropdownItems} />
+                <Dropdown onChoose={onSort} />
             </div>
         </div>
     );

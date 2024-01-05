@@ -1,39 +1,50 @@
 import axios from "axios";
 import React from "react";
-import { ItemBigProps } from "../components/ItemBigCard";
 import ItemsBigGrid from "../components/ItemsBigGrid";
+import Filters from "../components/Filters";
 import ItemsHeader from "../components/ItemsHeader";
 
 const Men = () => {
-    const [items, setItems] = React.useState<ItemBigProps[]>([]);
+    const [items, setItems] = React.useState([]);
     const [showFilter, setShowFilter] = React.useState<boolean>(true);
+    const [sort, setSort] = React.useState<string>("");
+    const [search, setSearch] = React.useState<string>("");
     React.useEffect(() => {
         axios.get("https://13ff161a782d7bb3.mokky.dev/items").then((res) => {
             setItems(res.data);
         });
     }, []);
 
-    const onSearch = React.useCallback((search: string) => {
-        console.log(search);
-        axios
-            .get(`https://13ff161a782d7bb3.mokky.dev/items?name=*${search}`)
-            .then((res) => {
-                if (res.data.length > 0) setItems(res.data);
-            });
+    const onSearch = React.useCallback((value: string) => {
+        setSearch(value);
     }, []);
-    return items.length === 0 ? (
-        "Loading"
-    ) : (
-        <main className="mx-auto my-0 w-11/12 m-auto">
+
+    React.useEffect(() => {
+        const searchStr = search ? `name=*${search}` : "";
+        console.log(searchStr);
+        const sortStr = sort ? `&sortBy=${sort}` : "";
+        axios
+            .get(
+                `https://13ff161a782d7bb3.mokky.dev/items?${searchStr}${sortStr}`
+            )
+            .then((res) => {
+                setItems(res.data);
+            });
+    }, [search, sort]);
+
+    const onSort = (value: string) => {
+        setSort(value);
+    };
+    return (
+        <main className="mx-auto my-0 px-10 m-auto">
             <ItemsHeader
-                showFilter={showFilter}
-                setShowFilter={setShowFilter}
                 onSearch={onSearch}
+                onShowFilter={setShowFilter}
+                onSort={onSort}
+                showFilter={showFilter}
             />
             <div className="flex items-top m-0 p-0">
-                {showFilter && (
-                    <aside className="w-3/12 h-screen overflow-y-auto bg-green-600 mr-20"></aside>
-                )}
+                <Filters showFilter={showFilter} />
                 <ItemsBigGrid items={items} />
             </div>
         </main>

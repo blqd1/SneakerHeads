@@ -3,14 +3,13 @@ import React from "react";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
 
-type DropdownItems = { [key: string]: string };
+const options = ["Price: High-Low", "Price: Low-High"];
 
 interface DropdownProps {
-    items: DropdownItems;
-    setSort: (sort: string) => void;
+    onChoose: (value: string) => void;
 }
 
-const Dropdown: React.FC<DropdownProps> = ({ items, setSort }) => {
+const Dropdown: React.FC<DropdownProps> = ({ onChoose }) => {
     const [isOpen, setIsOpen] = React.useState<boolean>(false);
     const [selectedItem, setSelectedItem] = React.useState<string>("Sort By");
 
@@ -18,8 +17,10 @@ const Dropdown: React.FC<DropdownProps> = ({ items, setSort }) => {
         setIsOpen(!isOpen);
     };
 
-    const selectItem = (item: string) => {
-        setSelectedItem("Sort By: " + item);
+    const handleClick = (value: string) => {
+        const apiString = value === options[0] ? "-price" : "price";
+        onChoose(apiString);
+        setSelectedItem(value);
         toggleDropdown();
     };
 
@@ -41,7 +42,6 @@ const Dropdown: React.FC<DropdownProps> = ({ items, setSort }) => {
                     <FontAwesomeIcon icon={faChevronDown} />
                 </motion.div>
             </div>
-
             <motion.div
                 className={`absolute w-full -z-1 ${
                     isOpen ? "" : "pointer-events-none"
@@ -51,24 +51,19 @@ const Dropdown: React.FC<DropdownProps> = ({ items, setSort }) => {
                 transition={{ duration: 0.3, ease: "easeInOut" }}
                 layout
             >
-                {Object.entries(items).map(
-                    ([displayString, apiQueryString], index) => (
-                        <div
-                            key={displayString}
-                            className={`p-2 cursor-pointer bg-white border border-y-0 ${
-                                index === Object.keys(items).length - 1
-                                    ? "rounded-b-2xl border-b"
-                                    : ""
-                            }`}
-                            onClick={() => {
-                                selectItem(displayString);
-                                setSort(apiQueryString);
-                            }}
-                        >
-                            {displayString}
-                        </div>
-                    )
-                )}
+                {options.map((value, index) => (
+                    <div
+                        key={value}
+                        className={`p-2 cursor-pointer bg-white border border-y-0 ${
+                            index === options.length - 1
+                                ? "rounded-b-2xl border-b"
+                                : ""
+                        }`}
+                        onClick={() => handleClick(value)}
+                    >
+                        {value}
+                    </div>
+                ))}
             </motion.div>
         </div>
     );

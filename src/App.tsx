@@ -7,10 +7,10 @@ import Men from "./pages/Men";
 import Children from "./pages/Children";
 function App() {
     return (
-        <div className="bg-gray-100 font-fjalla">
+        <div className="bg-gray-200 font-fjalla">
             <Header />
             <Routes>
-                <Route path="/home" element={<Home />} />
+                <Route path="/" element={<Home />} />
                 <Route path="/women" element={<Women />} />
                 <Route path="/men" element={<Men />} />
                 <Route path="/children" element={<Children />} />

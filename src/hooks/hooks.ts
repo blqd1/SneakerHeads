@@ -18,4 +18,5 @@ export const useDebounce = <T>(value: T, delay = 500) => {
 };
 
 export const useAppDispatch: () => AppDispatch = useDispatch;
+
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

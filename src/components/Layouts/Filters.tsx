@@ -1,5 +1,5 @@
 import React from "react";
-import CheckboxForm from "./UI/CheckboxForm";
+import CheckboxForm from "../UI/CheckboxForm/CheckboxForm";
 import { motion } from "framer-motion";
 
 interface FiltersProps {
@@ -9,7 +9,7 @@ interface FiltersProps {
 const Filters: React.FC<FiltersProps> = ({ showFilter }) => {
     return (
         <motion.aside
-            className="w-96 h-screen border bg-white overflow-hidden"
+            className="w-96 h-screen border bg-white overflow-hidden "
             initial={{ width: "24rem", marginRight: "1.25rem" }}
             animate={{
                 width: showFilter ? "24rem" : "0",

@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import Checkbox from "./Checkbox";
+import Checkbox from "../Checkbox/Checkbox";
 
 interface FormProps {
     label: string;
@@ -17,9 +17,9 @@ const CheckboxForm: React.FC<FormProps> = ({ label, options, onChange }) => {
     };
 
     return (
-        <div className="flex flex-col border">
+        <div className="flex flex-col border-b-2 px-3 py-4 justify-between">
             <span className="uppercase text-xl">{label}</span>
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-1 px-3">
                 {options.map((value) => (
                     <Checkbox
                         key={value}

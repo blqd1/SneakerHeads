@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
-import { useDebounce } from "../../hooks/hooks";
+import { useDebounce } from "../../../hooks/hooks";
 
 interface SearchProps {
     onDebounce: (value: string) => void;
@@ -20,7 +20,7 @@ const Search: React.FC<SearchProps> = ({ onDebounce }) => {
         <div className="relative flex items-center w-52 ">
             <input
                 type="text"
-                className="pl-10  py-2 border text-1xl"
+                className="pl-10  py-2 border text-1xl "
                 placeholder="Search"
                 value={value}
                 onChange={(e) => setValue(e.target.value)}

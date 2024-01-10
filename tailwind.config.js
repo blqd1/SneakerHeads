@@ -12,9 +12,8 @@ export default {
                 180: "45rem",
             },
             fontFamily: {
-                dosis: ["Dosis", "sans-serif"],
                 roboto: ["Roboto", "sans-serif"],
-                fjalla: ["Fjalla One", "sans-serif"],
+                lemon: ["Lemon", "sans-serif"],
             },
             zIndex: {
                 "-1": "-1",

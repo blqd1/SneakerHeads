@@ -56,12 +56,12 @@ const ItemBigCard: React.FC<ItemBigProps> = ({
                 <div className="flex flex-col">
                     <span className="text-xl pt-4">{name}</span>
                     <div className="flex gap-x-5">
-                        <span className="text-xl pt-2 text-gray-500">
+                        <span className="text-xl pt-2 text-gray-500 ">
                             {colors.length > 1
                                 ? `${colors.length} colors`
                                 : "1 color"}
                         </span>
-                        <span className="text-xl pt-2 text-gray-500 uppercase">
+                        <span className="text-xl pt-2 text-gray-500 uppercase ">
                             {brand}
                         </span>
                     </div>

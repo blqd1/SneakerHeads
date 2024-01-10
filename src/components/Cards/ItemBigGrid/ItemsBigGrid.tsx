@@ -1,5 +1,5 @@
 import React from "react";
-import ItemBigCard, { ItemBigProps } from "./ItemBigCard";
+import ItemBigCard, { ItemBigProps } from "../ItemBigCard/ItemBigCard";
 interface ItemsProps {
     items: ItemBigProps[];
 }
